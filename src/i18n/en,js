@@ -1,0 +1,20 @@
+import englishMessages from 'ra-language-english';
+
+export const messages = {
+    ...englishMessages,
+    resources: {
+        categories: {
+            name: 'Category |||| Categories',
+            fields: {
+                id: 'Code',
+                nama: 'Name',
+                jenis: 'Type',
+                createdate: 'Create Date',
+                lastupdate: 'Update Date',
+                isActive: 'Active'
+            },
+        },
+    },
+};
+
+export default messages;
