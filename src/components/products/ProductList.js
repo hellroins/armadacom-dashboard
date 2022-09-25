@@ -1,5 +1,5 @@
 import { useMediaQuery } from '@mui/material';
-import { List, SimpleList, Datagrid, TextField, EditButton, Filter, SearchInput, NumberField } from 'react-admin';
+import { List, SimpleList, Datagrid, TextField, EditButton, Filter, SearchInput, NumberField, BooleanField } from 'react-admin';
 import { FirebaseReferenceField } from "../../FirebaseReferenceFields";
 
 const ProductFilter = (props) => (
@@ -31,7 +31,7 @@ const ProductList = (props) => {
                         <TextField source="kondisi" />
                         <TextField source="catatan" />
                         <TextField source="warna_catatan" />
-                        <TextField source="isActive" label="Active" />
+                        <BooleanField source="isActive" label="Active" />
                         <EditButton />
                     </Datagrid>
                 )}
