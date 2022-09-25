@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useFormContext } from 'react-hook-form';
-import { TextInput, NumberInput, BooleanInput, SelectInput, required, TabbedForm, FormTab, ImageInput, ImageField, FormDataConsumer, AutocompleteInput } from 'react-admin';
+// import { useFormContext } from 'react-hook-form';
+import { TextInput, NumberInput, BooleanInput, SelectInput, required, TabbedForm, FormTab, ImageInput, ImageField, FormDataConsumer, AutocompleteInput, DateTimeInput } from 'react-admin';
 import { Grid } from '@mui/material';
 import { RichTextInput } from 'ra-input-rich-text';
 import { FirebaseReferenceInput } from "../../FirebaseReferenceFields";
@@ -8,49 +8,49 @@ import { ColorInput } from 'react-admin-color-picker';
 import axios from "axios";
 
 const HargaInput = () => {
-    const { setValue } = useFormContext()
+    // const { setValue } = useFormContext()
     // const { harga, setHarga } = useState(0)
     // const { diskon, setDiskon } = useState(1)
     // const { total, setTotal } = useState(0)
     var harga = 0;
     var diskon = 0;
     var total = 0;
-    const changeTotalFromHarga = (event) => {
-        // console.log(event.target.value)
-        if (event.target.value) {
-            const value = event.target.value - (event.target.value * diskon / 100)
-            harga = event.target.value
-            setValue('total', value)
-        }
-    }
-    const changeTotalFromDiskon = (event) => {
-        if (event.target.value > 0) {
-            // console.log('ini2')
-            const value = harga - (harga * event.target.value / 100)
-            diskon = event.target.value
-            setValue('total', value)
-        } else {
-            // console.log('ini')
-            const value = harga
-            // console.log(harga)
-            diskon = 0
-            setValue('total', value)
-        }
-    }
-    const changeDiskonFromTotal = (event) => {
-        // console.log('oke')
-        // }
-    }
+    // const changeTotalFromHarga = (event) => {
+    //     // console.log(event.target.value)
+    //     if (event.target.value) {
+    //         const value = event.target.value - (event.target.value * diskon / 100)
+    //         harga = event.target.value
+    //         setValue('total', value)
+    //     }
+    // }
+    // const changeTotalFromDiskon = (event) => {
+    //     if (event.target.value > 0) {
+    //         // console.log('ini2')
+    //         const value = harga - (harga * event.target.value / 100)
+    //         diskon = event.target.value
+    //         setValue('total', value)
+    //     } else {
+    //         // console.log('ini')
+    //         const value = harga
+    //         // console.log(harga)
+    //         diskon = 0
+    //         setValue('total', value)
+    //     }
+    // }
+    // const changeDiskonFromTotal = (event) => {
+    //     // console.log('oke')
+    //     // }
+    // }
     return (
         <>
             <Grid item xs={12} sm={4}>
-                <NumberInput source="harga" validate={required()} defaultValue={harga} onChange={changeTotalFromHarga} fullWidth />
+                <NumberInput source="harga" validate={required()} defaultValue={harga} /* onChange={changeTotalFromHarga} */ fullWidth />
             </Grid>
             <Grid item xs={12} sm={4}>
-                <NumberInput source="diskon" validate={required()} defaultValue={diskon} onChange={changeTotalFromDiskon} fullWidth />
+                <NumberInput source="diskon" validate={required()} defaultValue={diskon} /* onChange={changeTotalFromDiskon} */ fullWidth />
             </Grid>
             <Grid item xs={12} sm={4}>
-                <NumberInput source="total" validate={required()} defaultValue={total} onChange={changeDiskonFromTotal} label="Harga Promo" fullWidth />
+                <NumberInput source="total" validate={required()} defaultValue={total} /* onChange={changeDiskonFromTotal} */ label="Harga Promo" fullWidth />
             </Grid>
         </>
     );
@@ -105,6 +105,13 @@ export const ProductForm = () => {
                     </Grid>
                     <Grid item sm={3}>
                     </Grid>
+                    <Grid item sm={3}>
+                    </Grid>
+                    <Grid item xs={12} sm={5}>
+                        <DateTimeInput source="createdate" fullWidth label="Tanggal Posting"/>
+                    </Grid>
+                    <Grid item sm={3}>
+                    </Grid>
                 </Grid>
             </FormTab>
             <FormTab label="description">
@@ -125,7 +132,7 @@ export const ProductForm = () => {
                 </Grid>
             </FormTab>
             <FormTab label="galeri">
-                <ImageInput source="gambar" label="Galeri Images" accept="image/*" validate={required()}  multiple placeholder={<p>Pick some product images</p>}>
+                <ImageInput source="gambar" label="Galeri Images" accept="image/*" validate={required()} multiple placeholder={<p>Pick some product images</p>}>
                     <ImageField source="src" title="title" />
                 </ImageInput>
                 <BooleanInput source="isActive" label="Active" defaultValue={true} />
