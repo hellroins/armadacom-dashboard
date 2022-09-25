@@ -108,7 +108,7 @@ export const ProductForm = () => {
                     <Grid item sm={3}>
                     </Grid>
                     <Grid item xs={12} sm={5}>
-                        <DateTimeInput source="createdate" fullWidth label="Tanggal Posting"/>
+                        <DateTimeInput source="createdate" validate={required()} fullWidth label="Tanggal Posting"/>
                     </Grid>
                     <Grid item sm={3}>
                     </Grid>
