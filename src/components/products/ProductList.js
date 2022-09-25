@@ -1,5 +1,5 @@
 import { useMediaQuery } from '@mui/material';
-import { List, SimpleList, Datagrid, TextField, EditButton, RichTextField, Filter, SearchInput, NumberField } from 'react-admin';
+import { List, SimpleList, Datagrid, TextField, EditButton, Filter, SearchInput, NumberField } from 'react-admin';
 import { FirebaseReferenceField } from "../../FirebaseReferenceFields";
 
 const ProductFilter = (props) => (
