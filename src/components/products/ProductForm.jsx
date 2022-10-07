@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 // import { useFormContext } from 'react-hook-form';
-import { TextInput, NumberInput, BooleanInput, SelectInput, required, TabbedForm, FormTab, ImageInput, ImageField, FormDataConsumer, AutocompleteInput, DateTimeInput } from 'react-admin';
+import { TextInput, NumberInput, BooleanInput, SelectInput, required, TabbedForm, FormTab, ImageInput, ImageField, FormDataConsumer, DateTimeInput } from 'react-admin';
 import { Grid } from '@mui/material';
 import { RichTextInput } from 'ra-input-rich-text';
 import { FirebaseReferenceInput } from "../../FirebaseReferenceFields";
 import { ColorInput } from 'react-admin-color-picker';
-import axios from "axios";
+// import axios from "axios";
 
 const HargaInput = () => {
     // const { setValue } = useFormContext()
@@ -57,17 +57,17 @@ const HargaInput = () => {
 }
 
 export const ProductForm = () => {
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
-    const getKode = async (event) => {
-        if (event.target.value) {
-            const result = await axios.get(
-                "http://67d207301fb9.sn.mynetname.net:81/api/product?cari=" + event.target.value, { headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY2MjAxMDI4NywibmJmIjoxNjYyMDEwMjg3LCJqdGkiOiJtVnhSYklzbXZHMVRZMzg0Iiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.e-hhN23VQvHF9lW1-Z7meeC5LPirItPAk81yxd8JO_c' } }
-            );
-            setProducts(result.data.map((d) => ({ id: d.id, name: d.nama, data: d })));
-            // setProduct(result);
-        }
-    }
+    // const getKode = async (event) => {
+    //     if (event.target.value) {
+    //         const result = await axios.get(
+    //             "http://67d207301fb9.sn.mynetname.net:81/api/product?cari=" + event.target.value, { headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY2MjAxMDI4NywibmJmIjoxNjYyMDEwMjg3LCJqdGkiOiJtVnhSYklzbXZHMVRZMzg0Iiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.e-hhN23VQvHF9lW1-Z7meeC5LPirItPAk81yxd8JO_c' } }
+    //         );
+    //         setProducts(result.data.map((d) => ({ id: d.id, name: d.nama, data: d })));
+    //         // setProduct(result);
+    //     }
+    // }
 
     return (
         <TabbedForm warnWhenUnsavedChanges>
@@ -81,7 +81,8 @@ export const ProductForm = () => {
                             label="Kategori"
                             source="kategori_ref"
                             reference="categories">
-                            <SelectInput optionText={"nama"} validate={required()} onChange={getKode} fullWidth />
+                            <SelectInput optionText={"nama"} validate={required()} fullWidth />
+                            {/*onChange={getKode}*/}
                         </FirebaseReferenceInput>
 
                         {/* </ReferenceInput> */}
@@ -93,13 +94,15 @@ export const ProductForm = () => {
                     <Grid item xs={12} sm={5}>
                         <FormDataConsumer>
                             {({ formData, ...rest }) => (
-                                <AutocompleteInput
-                                    onCreate={(filter) => {
-                                        const newCategory = { id: filter, name: filter };
-                                        products.push(newCategory);
-                                        return newCategory;
-                                    }}
-                                    source="nama" choices={products} optionValue={"name"} fullWidth validate={required()} disabled={products.length ? false : true} {...rest} />
+                                // <AutocompleteInput
+                                //     onCreate={(filter) => {
+                                //         const newCategory = { id: filter, name: filter };
+                                //         products.push(newCategory);
+                                //         retrn newCategory;
+                                //     }}
+                                //     source="nama" choices={products} optionValue={"name"} fullWidth validate={required()} disabled={products.length ? false : true} {...rest} />
+                                    <TextInput source="nama" validate={required()} fullWidth {...rest}/>
+
                             )}
                         </FormDataConsumer>
                     </Grid>
