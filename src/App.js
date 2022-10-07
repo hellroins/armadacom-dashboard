@@ -39,7 +39,7 @@ const dataProvider = FirebaseDataProvider(firebaseConfig, {
   app: firebaseApp,
   // watch: ['posts'];
   // dontwatch: ['comments'];
-  persistence: 'local',
+  persistence: 'none',
   // disableMeta: true
   // dontAddIdFieldToDoc: true,
   lazyLoading: {
