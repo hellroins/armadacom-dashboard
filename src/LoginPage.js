@@ -3,7 +3,7 @@ import React from "react";
 import { Login, LoginForm } from "react-admin";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from "firebase/compat/app";
-
+import { styled } from '@mui/system';
 // Configure FirebaseUI.
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
@@ -11,10 +11,10 @@ const uiConfig = {
   // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
   // signInSuccessUrl: '#/',
   // We will display Google and Facebook as auth providers.
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID
-  ],
+  // signInOptions: [
+  //   firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  //   firebase.auth.FacebookAuthProvider.PROVIDER_ID
+  // ],
   // Optional callbacks in order to get Access Token from Google,Facebook,... etc
   callbacks: {
     signInSuccessWithAuthResult: (result) => {
@@ -23,7 +23,7 @@ const uiConfig = {
       const user = result.user;
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
       const accessToken = credential.accessToken;
-      console.log('oke')
+      // console.log('oke')
       console.log({result, user, accessToken});
     },
 
@@ -33,7 +33,7 @@ const uiConfig = {
       // will reset, clearing any UI. This commonly occurs for error code
       // 'firebaseui/anonymous-upgrade-merge-conflict' when merge conflict
       // occurs. Check below for more details on this.
-      console.log(error);
+      // console.log(error);
     }
   }
 }
@@ -44,18 +44,25 @@ const SignInScreen = () => <StyledFirebaseAuth
 />;
 
 const CustomLoginForm = props => (
-  <div>
+  <>
     <div style={{fontFamily: "monospace", marginLeft: '15px'}}>
     </div>
-    <LoginForm {...props} />
+    <LoginForm {...props} 
+    sx={{
+      backgroundColor: 'red'
+    }}/>
     <SignInScreen />
-  </div>
+  </>
 );
 
+const StyledLogin = styled(Login)({
+  backgroundImage: 'radial-gradient(circle at 50% 14em, #fff 0%, #fff 60%, #fff 100%)',
+})
+
 const LoginPage = props => (
-  <Login {...props}>
+  <StyledLogin {...props}>
     <CustomLoginForm {...props}/>
-  </Login>
+  </StyledLogin>
 );
 
 export default LoginPage;
