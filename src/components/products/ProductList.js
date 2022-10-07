@@ -1,5 +1,5 @@
 import { useMediaQuery } from '@mui/material';
-import { List, SimpleList, Datagrid, TextField, EditButton, Filter, SearchInput, NumberField, BooleanField } from 'react-admin';
+import { List, SimpleList, Datagrid, TextField, EditButton, Filter, SearchInput, NumberField, BooleanField, useRecordContext } from 'react-admin';
 import { FirebaseReferenceField } from "../../FirebaseReferenceFields";
 
 const ProductFilter = (props) => (
@@ -7,6 +7,22 @@ const ProductFilter = (props) => (
         <SearchInput placeholder="Customer Email" source='nama' resettable alwaysOn />
     </Filter>
 );
+
+const CustomColorField = ({ source }) => {
+    const record = useRecordContext();
+    return record ? (
+        <div>
+            <span 
+            style={{
+                height: '25px',
+                width: '25px',
+                backgroundColor: record[source],
+                borderRadius: '50%',
+                display: 'inline-block',
+            }}></span>
+        </div>
+    ) : null;
+}
 
 const ProductList = (props) => {
     const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
@@ -22,15 +38,14 @@ const ProductList = (props) => {
             ) :
                 (
                     <Datagrid>
-                        <FirebaseReferenceField source="kategori_ref" reference="categories" label="Kategori">
+                        <FirebaseReferenceField source="kategori_ref" reference="categories" label="Kategori" link={false}>
                             <TextField source="nama" />
                         </FirebaseReferenceField>
                         <TextField source="nama" />
                         <NumberField source="harga" locales={"id-ID"} options={{ style: 'currency', currency: 'IDR' }}/>
                         <NumberField source="diskon" />
                         <TextField source="kondisi" />
-                        <TextField source="catatan" />
-                        <TextField source="warna_catatan" />
+                        <CustomColorField source="warna_catatan" label='Warna'/>
                         <BooleanField source="isActive" label="Active" />
                         <EditButton />
                     </Datagrid>
